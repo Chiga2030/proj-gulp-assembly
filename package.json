@@ -1,0 +1,22 @@
+{
+  "name": "proj-assembly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hello": "node sayHello.js",
+    "createFolder": "mkdir build",
+    "deleteFolder": "rm -R build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebHeroSchool/proj-assembly.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebHeroSchool/proj-assembly/issues"
+  },
+  "homepage": "https://github.com/WebHeroSchool/proj-assembly#readme"
+}
