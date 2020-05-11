@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/WebHeroSchool/proj-assembly/issues"
   },
-  "homepage": "https://github.com/WebHeroSchool/proj-assembly#readme"
+  "homepage": "https://github.com/WebHeroSchool/proj-assembly#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
