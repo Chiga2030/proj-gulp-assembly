@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/WebHeroSchool/proj-assembly/issues"
   },
-  "homepage": "https://github.com/WebHeroSchool/proj-assembly#readme"
+  "homepage": "https://github.com/WebHeroSchool/proj-assembly#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0"
+  }
 }
