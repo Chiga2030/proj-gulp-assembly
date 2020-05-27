@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hello": "node sayHello.js",
+    "start": "gulp dev",
+    "build": "gulp prod",
     "createFolder": "mkdir build",
     "deleteFolder": "rm -R build"
   },
@@ -25,8 +26,11 @@
     "browser-sync": "^2.26.7",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.3",
+    "gulp-env": "^0.4.0",
+    "gulp-if": "^3.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2"
   }
