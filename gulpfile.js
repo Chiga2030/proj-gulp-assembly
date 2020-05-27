@@ -1,13 +1,14 @@
 const path = {
 	build: {
-		css: 'build/css/',
-		js: 'build/js/',
+		style: 'build/css/',
+		script: 'build/js/',
 	},
 	src: {
-		css: 'source/**/*.css',
-		js: 'source/**/*.js',
+		style: 'source/**/*.css',
+		script: 'source/**/*.js',
 	}
 };
+
 const gulp = require('gulp');
 const babel = require('gulp-babel');		//для трансшпиляции
 const concat = require('gulp-concat');	//для объединения файлов
@@ -16,30 +17,32 @@ const cssnano = require('gulp-cssnano');	//для минификации css-ф�
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 
-gulp.task('build-js', () => {
-	gulp.src(path.src.js)
+/* сборка скриптов в один файл *-min.js*/
+gulp.task('build-scripts', () => {
+	gulp.src(path.src.script)
 		.pipe(sourcemaps.init())
-			.pipe(concat('all.js'))
+			.pipe(concat('scripts-min.js'))
 			.pipe(babel({
 	    	presets: ['@babel/env']
 	    }))
     	.pipe(uglify())
   	.pipe(sourcemaps.write())
-		.pipe(gulp.dest(path.build.js));
+		.pipe(gulp.dest(path.build.script));
 });
 
-gulp.task('build-css', () => {
-	gulp.src(path.src.css)
+/* сборка стилей в один файл style-min.css*/
+gulp.task('build-styles', () => {
+	gulp.src(path.src.style)
 		.pipe(sourcemaps.init())
-			.pipe(concat('style.css'))
+			.pipe(concat('style-min.css'))
 			.pipe(cssnano())
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(path.build.css));
+		.pipe(gulp.dest(path.build.style));
 });
-
 gulp.task('default', ['browser-sync']);
-
-
+gulp.task('build', ['build-styles', 'build-scripts']);
+gulp.task('prod', ['build']);	//build for prod
+gulp.task('dev', ['build', 'browser-sync']);	//build for dev
 
 gulp.task('browser-sync', () => {
 	browserSync.init({
@@ -47,10 +50,9 @@ gulp.task('browser-sync', () => {
     	baseDir: "./build/"
     }
   });
-
-	gulp.watch(path.src.js, ['watch-js']);
-	gulp.watch(path.src.css, ['watch-css']);
+	gulp.watch(path.src.script, ['watch-scripts']);
+	gulp.watch(path.src.style, ['watch-styles']);
 });
 
-gulp.task('watch-js', ['build-js'], () => browserSync.reload());
-gulp.task('watch-css', ['build-css'], () => browserSync.reload());
+gulp.task('watch-styles', ['build-styles'], () => browserSync.reload());
+gulp.task('watch-scripts', ['build-scripts'], () => browserSync.reload());
