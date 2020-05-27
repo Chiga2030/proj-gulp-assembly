@@ -14,9 +14,9 @@ const concat = require('gulp-concat');	//для объединения файл�
 const uglify = require('gulp-uglify');	//для минификации js-файлов
 const cssnano = require('gulp-cssnano');	//для минификации css-файлов
 const sourcemaps = require('gulp-sourcemaps');
+const browserSync = require('browser-sync').create();
 
 gulp.task('build-js', () => {
-	//gulp.src(path.src.js)
 	gulp.src(path.src.js)
 		.pipe(sourcemaps.init())
 			.pipe(concat('all.js'))
@@ -37,9 +37,20 @@ gulp.task('build-css', () => {
 		.pipe(gulp.dest(path.build.css));
 });
 
-gulp.task('default', ['build-js', 'build-css']);
+gulp.task('default', ['browser-sync']);
 
-gulp.task('watch', () => {
-	gulp.watch(path.src.js, ['build-js'])
-	gulp.watch(path.src.css, ['build-css'])
+
+
+gulp.task('browser-sync', () => {
+	browserSync.init({
+    server: {
+    	baseDir: "./build/"
+    }
+  });
+
+	gulp.watch(path.src.js, ['watch-js']);
+	gulp.watch(path.src.css, ['watch-css']);
 });
+
+gulp.task('watch-js', ['build-js'], () => browserSync.reload());
+gulp.task('watch-css', ['build-css'], () => browserSync.reload());
